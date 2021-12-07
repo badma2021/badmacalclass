@@ -5,7 +5,6 @@ import java.util.Map;
 
 class Numerals {
     int FindRoman(String name) {
-        //System.out.println(s);
         int j = 0;
         int i = 0;
         int k = -1;

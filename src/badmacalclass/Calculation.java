@@ -16,7 +16,7 @@ class Calculation {
         String l1 = s.substring(0, FindOperator(s));
         String l = s.substring(FindOperator(s) + 1, x);
 
-        //бросаем исключение в случаев вида X+4 / 4+X
+        //to throw exception like "X+4" / "4+X", different numerical systems at the same time in the block of searching Roman numerals
         try {
             if (((FindRoman(l1) > -1) ^ (FindRoman(l) > -1))) {
                 throw new difNumerals(l1, l);
@@ -24,6 +24,7 @@ class Calculation {
         } catch (difNumerals e) {
             System.out.println(e);
         }
+        //to mark flag if there is any Roman numeral as input value
         if (((FindRoman(l1) > -1) & (FindRoman(l) > -1)) & (flag > 0)) {
 
             l1 = Numerals.romanToInt(l1);
@@ -35,11 +36,14 @@ class Calculation {
         int y1 = Integer.parseInt(l1);
         int y = Integer.parseInt(l);
 
+        // to eliminate any inputs except 1-10
         if ((y1 > max || y > max) || (y1 < min || y < min)) {
             y1 = 0;
             y = 0;
-            System.out.println("input numeral should be in 1-10 Arabic interval");
+            System.out.println("input numeral should be in 1-10 or I-X interval");
         }
+
+        // core calculation
         char z = (char) FindSign(s);
         switch (z) {
             case 43:
@@ -57,7 +61,7 @@ class Calculation {
             default:
                 System.out.println("Oooops, something is wrong!");
         }
-        //бросаем исключение для случаев вида I-II <0
+        //to throw exception for negative output of the Roman numerals "I-II" <0
         try {
             if ((result < 0) & (flag > 1))
                 throw new
@@ -65,22 +69,20 @@ class Calculation {
         } catch (NegRomOutput e) {
             System.out.println(e);
         }
+
+        // sophisticated output process))
         String resultRoman = Numerals.arabicToRom(result);
         if ((flag > 1) & (!resultRoman.equals(""))) {
             return (resultRoman);
-//        } else if ((flag < 1) & (resultRoman.equals(""))) {
-//            return Integer.toString(result);
         } else if ((flag > 1) & (resultRoman.equals(""))) {
             return ("No zero result for output in Roman numerals");
         } else
-
             return Integer.toString(result);
 
     }
 
 
     static int FindOperator(String name) {
-        //System.out.println(s);
         int j = 0;
         int i = 0;
         int n = 0;
@@ -99,7 +101,6 @@ class Calculation {
     }
 
     static int FindSign(String name) {
-        //System.out.println(s);
         int j = 0;
         int i = 0;
         char m = 0;
@@ -117,7 +118,6 @@ class Calculation {
     }
 
     static int FindRoman(String name) {
-        //System.out.println(s);
         int j = 0;
         int i = 0;
         int k = -1;

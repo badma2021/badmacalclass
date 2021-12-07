@@ -24,6 +24,6 @@ class difNumerals extends Exception {
     }
 
     public String toString() {
-        return "используются одновременно разные системы счисления";
+        return "different numerical systems are involved";
     }
 }
